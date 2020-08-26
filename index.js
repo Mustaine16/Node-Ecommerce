@@ -1,9 +1,25 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cookieSession = require('cookie-session')
+const methodOverride = require('method-override')
+
+//Routes
+const userRouter = require("./routes/userRouter")
+const sessionRouter = require("./routes/sessionRouter")
 
 const app = express()
 
-const router = require("./routes/userRouter")
+//Middlewares
+app.use(bodyParser.json())
+app.use(cookieSession({
+  name: 'session',
+  keys: ["3jh2czc79afa", "o0zvgk1rvz6xc"],
+  httpOnly: true,
+  maxAge: 24 * 60 * 60 * 1000
+}))
+app.use(methodOverride("_method"))
 
-app.use("/api/users",router)
+app.use("/api/users", userRouter)
+app.use("/api/sessions", sessionRouter)
 
 app.listen(3000, () => console.log("Server running on port 3000"))

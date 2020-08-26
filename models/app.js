@@ -30,43 +30,16 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "Name cannot be empty"
-        },
-        notNull: {
-          args: true,
-          msg: "Name cannot be null"
-        },
-      }
     },
 
     price: {
       type: DataTypes.FLOAT,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "Price cannot be empty"
-        },
-        notNull: {
-          args: true,
-          msg: "Price cannot be null"
-        },
-      }
+      allowNull: false,
     },
 
     logo: {
-      type: DataTypes.STRING, validate: {
-        notEmpty: {
-          args: true,
-          msg: "Logo cannot be empty"
-        },
-        notNull: {
-          args: true,
-          msg: "Logo cannot be null"
-        },
-      }
+      type: DataTypes.STRING,
+      allowNull: false,
     },
 
     categoryId: DataTypes.INTEGER,
@@ -76,9 +49,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'App',
-    validate:{
-      notEmptyOrNull(){
-        if((!this.name || !this.price || !this.logo || !this.categoryId || !this.userId)){
+    validate: {
+      notEmptyOrNull() {
+        if ((!this.name || !this.price || !this.logo || !this.categoryId || !this.userId)) {
           throw new Error('Attributes cannot be empty or null')
         }
       }
