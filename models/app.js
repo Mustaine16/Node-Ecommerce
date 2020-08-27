@@ -21,12 +21,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "categoryId"
       })
 
-      App.belongsToMany(models.User, {
-        through: "Sales"
+      App.belongsToMany(models.Sale, {
+        through: "Sales",
+        as:"purchased"
       })
 
-      App.belongsToMany(models.User, {
-        through: "Wishlists"
+      App.belongsToMany(models.Wishlist, {
+        through: "Wishlists",
+        as:"wishlist"
       })
     }
   };
@@ -35,32 +37,72 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "name cannot bet null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "name cannot be empty"
+        }
+      }
     },
 
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        isFloat:{
+          args:true,
+          msg: "Price must be a number"
+        },
+        notNull: {
+          args: true,
+          msg: "price cannot bet null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "price cannot be empty"
+        }
+      }
     },
 
     logo: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "logo cannot bet null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "logo cannot be empty"
+        }
+      }
     },
 
     categoryId: DataTypes.INTEGER,
 
-    userId: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "userId cannot bet null"
+        },
+        notEmpty: {
+          args: true,
+          msg: "userId cannot be empty"
+        }
+      }
+    }
 
   }, {
     sequelize,
     modelName: 'App',
-    validate: {
-      notEmptyOrNull() {
-        if ((!this.name || !this.price || !this.logo || !this.categoryId || !this.userId)) {
-          throw new Error('Attributes cannot be empty or null')
-        }
-      }
-    }
   });
   return App;
 };

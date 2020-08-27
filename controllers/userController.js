@@ -1,4 +1,6 @@
 const { User } = require("../models")
+const { App } = require("../models")
+
 const paramsBuilder = require("../utils/paramsBuilder")
 const { ResponseObject, responseHandler } = require("../network/response")
 
@@ -37,7 +39,17 @@ const controller = {
       const response = new ResponseObject("", "Error creating user", 400)
       return responseHandler(res, response, err)
     }
-  }
+  },
+
+  getDevApps: async (req, res) => {
+    const user = req.user
+    const apps = await user.getApps();
+    res.send(apps)
+  },
+
+  getClientApps: async (req, res) => {
+
+  },
 }
 
 module.exports = controller

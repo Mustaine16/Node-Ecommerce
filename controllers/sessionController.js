@@ -11,9 +11,8 @@ const controller = {
   login: async (req, res, next) => {
 
     //If the user user is already logged in
-    console.log("req.authuser:" + " " + req.authUser);
 
-    if (req.authUser)
+    if (req.user)
       return responseHandler(res, new ResponseObject("", "You are already logged in", 400));
 
     try {
@@ -32,7 +31,7 @@ const controller = {
         if (authenticated) {
           //Don't retrieve password_hash
           user.password_hash = ""
-          req.authUser = user;
+         req.user = user;
           return next();
         } else {
           return responseHandler(res, new ResponseObject("", "Invalid password", 401))
@@ -51,9 +50,9 @@ const controller = {
   createToken: async (req, res, next) => {
 
     try {
-      if (!req.authUser) return next()
+      if (!req.user) return next()
 
-      const token = await jwt.sign({ id: req.authUser.id }, jwtKey, {
+      const token = await jwt.sign({ id:req.user.id }, jwtKey, {
         expiresIn: "24h",
       });
 
@@ -69,6 +68,7 @@ const controller = {
   },
 
   sendSession: function (req, res) {
+    console.log(req.user);
     return responseHandler(res, new ResponseObject(req.user, "", 200))
   },
 
