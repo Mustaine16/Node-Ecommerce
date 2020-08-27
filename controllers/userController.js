@@ -9,10 +9,10 @@ const validParams = {
 
 const controller = {
 
-  find: async (req, res) => {
+  findUser: async (req, res, next) => {
 
     const id = req.authUserId
-    const user = await User.findByPk(id, { attributes: ["id","username", "role"] })
+    const user = await User.findByPk(id, { attributes: ["id", "username", "role"] })
 
     if (!user) return responseHandler(res, ResponseObject("", "User not found", 404))
 

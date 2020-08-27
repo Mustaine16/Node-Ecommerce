@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       User.hasMany(models.App, {
-        as: "apps"
+        as: "apps",
+        foreignKey: "userId"
       })
 
       User.belongsToMany(models.Sale, {

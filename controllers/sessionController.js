@@ -69,7 +69,7 @@ const controller = {
   },
 
   sendSession: function (req, res) {
-    return responseHandler(res, new ResponseObject(req.authUser, "", 200))
+    return responseHandler(res, new ResponseObject(req.user, "", 200))
   },
 
   destroySession: function (req, res) {

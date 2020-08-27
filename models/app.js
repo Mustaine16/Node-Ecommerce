@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId"
       })
 
+      App.belongsTo(models.Category, {
+        as: "category",
+        foreignKey: "categoryId"
+      })
+
       App.belongsToMany(models.User, {
         through: "Sales"
       })

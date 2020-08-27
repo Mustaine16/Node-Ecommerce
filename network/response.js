@@ -8,20 +8,21 @@ exports.ResponseObject = class ResponseObject {
 
 exports.responseHandler = (res, responseObject, err = "") => {
 
-  if(err && err.name === "SequelizeUniqueConstraintError"){
-
-    if(err.original.table === "Users"){
-      responseObject.error = "There is an account asociated with this username" 
-    }else{
+  if (err && err.name === "SequelizeUniqueConstraintError") {
+    console.log(err)
+    responseObject.status = 400
+    if (err.original.table === "Users") {
+      responseObject.error = "There is an account asociated with this username"
+    } else {
       responseObject.error = "App name duplicated, choose another"
     }
-    
   }
 
-  if (err && err.name === "SequelizeValidationError"){
+  if (err && err.name === "SequelizeValidationError") {
     console.log(err);
+    responseObject.status = 400
     responseObject.error = []
-    err.errors.map(e=> responseObject.error.push(e.message))
+    err.errors.map(e => responseObject.error.push(e.message))
   }
 
   res.status(responseObject["status"])

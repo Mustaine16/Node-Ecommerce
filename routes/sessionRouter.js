@@ -6,7 +6,7 @@ const userController = require('../controllers/userController')
 
 const router = Router();
 
-const { find } = userController
+const { findUser } = userController
 const { login, createToken, sendSession, destroySession } = sessionController
 
 router.route("/")
@@ -14,7 +14,7 @@ router.route("/")
   .delete(destroySession)
 
 router.route("/check")
-  .post(authMidd, find, sendSession)
+  .post(authMidd, findUser, sendSession)
 
 
 module.exports = router

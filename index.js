@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 //Routes
 const userRouter = require("./routes/userRouter")
 const sessionRouter = require("./routes/sessionRouter")
+const categoryRouter = require("./routes/categoryRouter")
 
 const app = express()
 
@@ -21,5 +22,6 @@ app.use(methodOverride("_method"))
 
 app.use("/api/users", userRouter)
 app.use("/api/sessions", sessionRouter)
+app.use("/api/categories", categoryRouter)
 
 app.listen(3000, () => console.log("Server running on port 3000"))
