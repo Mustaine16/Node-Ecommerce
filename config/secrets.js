@@ -1,3 +1,3 @@
 module.exports = {
-  "jwtKey": "n23kj4b2097vs0df0"
+  "jwtKey": "b8j4v231j4hvzxc687g68a06"
 }
