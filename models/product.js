@@ -90,14 +90,14 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     description: {
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       allowNull: false
     },
 
     categoryId: DataTypes.INTEGER,
 
     brandId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
 

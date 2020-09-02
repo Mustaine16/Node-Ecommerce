@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   };
-  
+
   Brand.init({
     name: {
       type: DataTypes.STRING,

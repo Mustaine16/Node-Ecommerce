@@ -15,10 +15,9 @@ router.route('/')
   .post(create, login, createToken, sendSession)
 
 router.route('/apps')
-  .get(authMidd, findUser, getClientProducts)
+  .get(authMidd, findUser)
 
 router.route('/dev')
-  .get(authMidd, findUser, authDev, getDevProducts)
-
+  .get(authMidd, findUser, authDev)
 
 module.exports = router
