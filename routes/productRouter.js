@@ -3,12 +3,12 @@ const { Router } = require("express")
 const authMidd = require("../middlewares/authMidd")
 const authDev = require("../middlewares/authDev")
 const authOwner = require("../middlewares/authOwner")
-const appController = require("../controllers/appController")
+const productController = require("../controllers/productController")
 const userController = require("../controllers/userController")
 
 const router = Router();
 
-const { findApp, index, show, create, update, destroy } = appController
+const { findProduct, index, show, create, update, destroy } = productController
 const { findUser } = userController
 
 router.route("/")
@@ -16,8 +16,8 @@ router.route("/")
   .post(authMidd, findUser, authDev, create)
 
 router.route("/:id")
-  .get(authMidd, findApp, show)
-  .put(authMidd, findUser, authDev, findApp, authOwner, update)
-  .delete(authMidd, findUser, authDev, findApp, authOwner, destroy)
+  .get(authMidd, findProduct, show)
+  .put(authMidd, findUser, authDev, findProduct, authOwner, update)
+  .delete(authMidd, findUser, authDev, findProduct, authOwner, destroy)
   
 module.exports = router

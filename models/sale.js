@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Sale.init({
     userId: DataTypes.INTEGER,
-    appId: DataTypes.INTEGER
+    productId: DataTypes.INTEGER,
+    saleId:DataTypes.INTEGER,
+    total: DataTypes.FLOAT,
+    quantity: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Sale',

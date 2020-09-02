@@ -8,17 +8,17 @@ const sessionController = require("../controllers/sessionController")
 
 const router = Router()
 
-const { findUser, create, getClientApps ,getDevApps } = userController
+const { findUser, create } = userController
 const { login, createToken, sendSession } = sessionController
 
 router.route('/')
   .post(create, login, createToken, sendSession)
 
-router.route("/apps")
-  .get(authMidd, findUser, getClientApps)
+router.route('/apps')
+  .get(authMidd, findUser, getClientProducts)
 
 router.route('/dev')
-  .get(authMidd, findUser, authDev, getDevApps)
+  .get(authMidd, findUser, authDev, getDevProducts)
 
 
 module.exports = router

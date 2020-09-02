@@ -4,6 +4,7 @@ const { User } = require("../models")
 
 const paramsBuilder = require('../utils/paramsBuilder')
 const { ResponseObject, responseHandler } = require("../network/response")
+
 const validParams = ["username", "password"]
 
 const controller = {

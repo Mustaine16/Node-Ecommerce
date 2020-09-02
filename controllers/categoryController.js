@@ -33,8 +33,8 @@ const controller = {
   },
 
   show: async (req, res) => {
-    const apps = await req.category.getApps();
-    res.send(apps)
+    const products = await req.category.getProducts();
+    res.send(products)
   },
 
   create: async (req, res) => {

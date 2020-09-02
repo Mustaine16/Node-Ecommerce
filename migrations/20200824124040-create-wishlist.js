@@ -20,10 +20,10 @@ module.exports = {
         onDelete:"CASCADE"
       },
 
-      appId: {
+      productId: {
         type: Sequelize.INTEGER,
         references:{
-          model:"Apps",
+          model:"Products",
           key:"id"
         },
         onUpdate:"CASCADE",

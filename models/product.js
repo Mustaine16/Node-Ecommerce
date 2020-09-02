@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class App extends Model {
+  class Product extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,28 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      App.belongsTo(models.User, {
+      Product.belongsTo(models.User, {
         as: "user",
         foreignKey: "userId"
       })
 
-      App.belongsTo(models.Category, {
+      Product.belongsTo(models.Category, {
         as: "category",
         foreignKey: "categoryId"
       })
 
-      App.belongsToMany(models.Sale, {
-        through: "Sales",
-        as:"purchased"
+      Product.belongsTo(models.Brand, {
+        as: "brand",
+        foreignKey: "brandId"
       })
 
-      App.belongsToMany(models.Wishlist, {
+      Product.belongsToMany(models.Sale, {
+        through: "Sales",
+        as: "purchased"
+      })
+
+      Product.belongsToMany(models.Wishlist, {
         through: "Wishlists",
-        as:"wishlist"
+        as: "wishlist"
       })
     }
   };
-  App.init({
+
+  Product.init({
 
     name: {
       type: DataTypes.STRING,
@@ -53,8 +59,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        isFloat:{
-          args:true,
+        isFloat: {
+          args: true,
           msg: "Price must be a number"
         },
         notNull: {
@@ -83,7 +89,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
 
+    description: {
+      type: DataTypes.String,
+      allowNull: false
+    },
+
     categoryId: DataTypes.INTEGER,
+
+    brandId: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
 
     userId: {
       type: DataTypes.INTEGER,
@@ -102,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     sequelize,
-    modelName: 'App',
+    modelName: 'Product',
   });
-  return App;
+  return Product;
 };

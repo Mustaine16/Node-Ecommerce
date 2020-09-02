@@ -1,5 +1,5 @@
 const { User } = require("../models")
-const { App } = require("../models")
+const { Product } = require("../models")
 
 const paramsBuilder = require("../utils/paramsBuilder")
 const { ResponseObject, responseHandler } = require("../network/response")
@@ -41,15 +41,6 @@ const controller = {
     }
   },
 
-  getDevApps: async (req, res) => {
-    const user = req.user
-    const apps = await user.getApps();
-    res.send(apps)
-  },
-
-  getClientApps: async (req, res) => {
-
-  },
 }
 
 module.exports = controller

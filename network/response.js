@@ -14,7 +14,7 @@ exports.responseHandler = (res, responseObject, err = "") => {
     if (err.original.table === "Users") {
       responseObject.error = "There is an account asociated with this username"
     } else {
-      responseObject.error = "App name duplicated, choose another"
+      responseObject.error = "Product name duplicated, choose another"
     }
   }
 
